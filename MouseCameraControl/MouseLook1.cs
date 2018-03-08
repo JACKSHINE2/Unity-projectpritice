@@ -16,6 +16,8 @@ public class MouseLook1 : MonoBehaviour {
         parentTragetRot= transform.localRotation;
         cameraTargetRot = Camera.main.transform.localRotation;
 	}
+
+    
 	
 	// Update is called once per frame
         //get the angle of the 

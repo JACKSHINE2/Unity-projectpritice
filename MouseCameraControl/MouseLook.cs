@@ -12,6 +12,7 @@ public class MouseLook : MonoBehaviour {
 		
 	}
 	
+    
 	// Update is called once per frame
 	void Update () {
         //按住鼠标右键再旋转
