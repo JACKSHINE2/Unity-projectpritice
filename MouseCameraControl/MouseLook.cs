@@ -16,14 +16,13 @@ public class MouseLook : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //按住鼠标右键再旋转
-        if (Input.GetMouseButton(1)) {
-            float x = Input.GetAxis("Mouse X")*sensitivity;
-            float y = Input.GetAxis("Mouse Y")*sensitivity;
+        if (Input.GetMouseButton(0)) {
+            float x = Input.GetAxis("Mouse X");
+            float y = Input.GetAxis("Mouse Y");
             float rotationY= transform.eulerAngles.y + x;
             float rotationX= transform.eulerAngles.x + y;
-            rotationX = Mathf.Clamp(rotationX,minAngle,maxAngle);
-            rotationY = Mathf.Clamp(rotationY, minAngle, maxAngle);
-            transform.eulerAngles = new Vector3(-rotationX ,rotationY,0);
+            
+            transform = new Vector3(-rotationX ,rotationY,0);
 
 
         }
