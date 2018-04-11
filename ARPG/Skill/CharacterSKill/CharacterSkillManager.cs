@@ -7,8 +7,7 @@ using UnityEngine;
 
 public class CharacterSkillManager : MonoBehaviour
 {
-    // 管理多个技能数据对象---容器List<SkillData> 所有技能
-  
+    // 管理多个技能数据对象---容器List<SkillData> 所有技能  
     public List<SkillData> skills = new List<SkillData>();
     //角色拥有者的状态信息
     private CharacterState chState;
@@ -17,25 +16,19 @@ public class CharacterSkillManager : MonoBehaviour
     private ISelectAttackMode attackMode;
     public void Start()
     {
-        chState = GetComponent<CharacterState>();
-     
+        chState = GetComponent<CharacterState>();     
         foreach (var item in skills)
         {
             //24byte
             //加载技能预制体
-            if (item.skillPerfab == null
-                && !string.IsNullOrEmpty(item.perfabName))
+            if (item.skillPerfab == null  && !string.IsNullOrEmpty(item.perfabName))
             {
-                item.skillPerfab = Resources.Load<GameObject>("Skill/" +
-                    item.perfabName);
-                
+                item.skillPerfab = Resources.Load<GameObject>("Skill/" + item.perfabName);                
             }
             //加载该技能在受击方的预制体
-            if (item.hitFxPrefab == null
-      && !string.IsNullOrEmpty(item.hitFxName))
+            if (item.hitFxPrefab == null && !string.IsNullOrEmpty(item.hitFxName))
             {
-                item.hitFxPrefab = Resources.Load<GameObject>("Skill/" +
-                    item.hitFxName);
+                item.hitFxPrefab = Resources.Load<GameObject>("Skill/" + item.hitFxName);
             }
         }
         #region 测试技能使用
@@ -60,8 +53,7 @@ public class CharacterSkillManager : MonoBehaviour
     public SkillData PrepareSkill(int id)
     {
         //找到skills当中id为当前传入id的对象
-        SkillData skillData =
-            skills.Find(p => p.skillID == id);
+        SkillData skillData = skills.Find(p => p.skillID == id);
         //for (int i = 0; i < skills.Count; i++)
         //{
         //    if (skills[i].skillID == id)
@@ -70,8 +62,7 @@ public class CharacterSkillManager : MonoBehaviour
         //如果当前技能不为空且当前技能释放者
         //sp>=当前技能释放所需要的sp且当前技能
         //剩余冷却时间为0
-        if (skillData != null && chState.sp >= skillData.costSp
-            && skillData.coolRemain == 0)
+        if (skillData != null && chState.sp >= skillData.costSp && skillData.coolRemain == 0)
         {
             skillData.Onwer = gameObject;
             return skillData;
@@ -82,12 +73,9 @@ public class CharacterSkillManager : MonoBehaviour
     public void DeploySkill(SkillData skillData)
     {
         //创建技能预制件  对象池
-        GameObject skillObj =
-            Instantiate(skillData.skillPerfab,
-            transform.position, transform.rotation);
+        GameObject skillObj =Instantiate(skillData.skillPerfab, transform.position, transform.rotation);
         //进行技能释放  使用产品
-        SkillDeployer skillDeployer
-            = skillObj.GetComponent<SkillDeployer>();
+        SkillDeployer skillDeployer = skillObj.GetComponent<SkillDeployer>();
         //告诉工厂我们所需要加工的技能原材料
         skillDeployer.skillData = skillData;
         //释放技能（使用加工好的该产品进行技能释放）

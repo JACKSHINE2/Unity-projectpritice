@@ -21,9 +21,7 @@ public class CharacterMotor : MonoBehaviour {
         if (hor != 0 || ver != 0)
         {
             RotationC(hor);
-            transform.Translate(
-                Vector3.forward * Time.deltaTime
-                * state.moveSpeed *ver);
+            transform.Translate( Vector3.forward * Time.deltaTime  * state.moveSpeed *ver);
             state.anim.PlayAnim(AnimationName.run);
         }
        
@@ -36,8 +34,7 @@ public class CharacterMotor : MonoBehaviour {
     /// <param name="hor">水平轴</param>
     private void RotationC(float hor)
     {
-        transform.Rotate(new Vector3(
-            0, hor, 0)*Time.deltaTime* state.rotationSpeed);
+        transform.Rotate(new Vector3( 0, hor, 0)*Time.deltaTime* state.rotationSpeed);
     }
 }
 public enum RunningType

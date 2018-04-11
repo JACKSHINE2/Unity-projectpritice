@@ -14,10 +14,8 @@ namespace Skill
             set
             {
                 m_skillData = value;
-                attackMode = SelectorFactory.
-                    CreatDamageMode(m_skillData.damageMode);
-                chState = m_skillData.Onwer
-                    .GetComponent<CharacterState>();
+                attackMode = SelectorFactory.CreatDamageMode(m_skillData.damageMode);
+                chState = m_skillData.Onwer.GetComponent<CharacterState>();
             }
             get {
                 return m_skillData;
@@ -56,18 +54,15 @@ namespace Skill
 
                 }
                 //等待伤害间隔时间进行下一次伤害
-                yield return new WaitForSeconds
-                    (skillData.damageInterval);
+                yield return new WaitForSeconds(skillData.damageInterval);
                 attackTime += skillData.damageInterval;
-
             } while (m_skillData.duiationTime>attackTime);
         }
 
         private void ReseTargets()
         {
             if (m_skillData == null) return;
-            m_skillData.attackTargets = attackMode.SelectTarget(m_skillData,
-                transform);
+            m_skillData.attackTargets = attackMode.SelectTarget(m_skillData, transform);
         }
 
         /// <summary>
@@ -77,12 +72,10 @@ namespace Skill
         public virtual void TargetImpact(GameObject target)
         {
             //target减血方法
-            float attack = skillData.Onwer.
-                  GetComponent<CharacterState>().attack;
+            float attack = skillData.Onwer.GetComponent<CharacterState>().attack;
             //计算当前技能的真实攻击力
             float realAttack = attack * skillData.damage;
-            CharacterState targetChState = target.GetComponent
-                <CharacterState>();
+            CharacterState targetChState = target.GetComponent<CharacterState>();
             //调用目标身上的减血方法
             targetChState.OnDamage(realAttack);
             //产生受击点特效
@@ -92,13 +85,9 @@ namespace Skill
                 //对象池
                 if (targetHitPos != null)
                 {
-                    GameObject go = Instantiate(skillData.hitFxPrefab,
-                          targetHitPos.position,
-                          targetHitPos.rotation);
+                    GameObject go = Instantiate(skillData.hitFxPrefab, targetHitPos.position,targetHitPos.rotation);
                     Destroy(go, 0.1f);
-                }
-
-
+                }                
             }
         }
         /// <summary>
@@ -106,10 +95,8 @@ namespace Skill
         /// </summary>
         /// <param name="self"></param>
         public virtual void SelfImpact()
-        {
-           
+        {           
             chState.sp -= skillData.costSp;
-
         }
 
     }
